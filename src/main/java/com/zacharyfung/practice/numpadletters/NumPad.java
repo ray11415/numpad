@@ -1,9 +1,6 @@
 package com.zacharyfung.practice.numpadletters;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ZacharyFung
@@ -49,7 +46,7 @@ public class NumPad {
         }
 
         //Write in results
-        List<String> results = new ArrayList<>(combinationsBook.keySet());
+        List<String> results = removeDuplicates(combinationsBook.keySet());
 
         //Sort Results for better reading
         Collections.sort(results);
@@ -109,4 +106,23 @@ public class NumPad {
         return checkedNumbers;
     }
 
+    private List<String> removeDuplicates(Set<String> stringSet) {
+        List<String> result = new ArrayList<>();
+        List<char[]> characterList = new ArrayList<>();
+        for (String string : stringSet) {
+            char[] arr = string.toCharArray();
+            Arrays.sort(arr);
+            characterList.add(arr);
+        }
+        String lastOne = "";
+        for (char[] chars : characterList) {
+            String current = new String(chars);
+            if (lastOne.equals(current)) {
+                continue;
+            }
+            result.add(current);
+            lastOne = current;
+        }
+        return result;
+    }
 }
