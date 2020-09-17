@@ -3,6 +3,7 @@ package com.zacharyfung.practice.numpadletters;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,16 +13,15 @@ class NumpadlettersApplicationTests {
     NumPad numpad = new NumPad();
 
     /**
+     * Question:Stage 2;
      * Testing numpad with 2 digits random number;
      */
     @Test
     void twoDigitTest() {
-        int[] test = {2, 3};
-        try {
-            printOut(this.numpad.getCombinations(test));
-        } catch (IllegalNumberException e) {
-            e.printStackTrace();
-        }
+        List<Integer> test = new ArrayList<>();
+        test.add(23);
+        test.add(21);
+        printOut(this.numpad.getCombinations(test));
     }
 
     /**
@@ -30,21 +30,26 @@ class NumpadlettersApplicationTests {
      */
     @Test
     void nDigitTest() {
-        int[] someHugeDigits = new int[99];
+        List<Integer> someHugeDigits = new ArrayList<>();
         for (int i = 0; i < 99; i++) {
-            someHugeDigits[i] = getRandom();
+            someHugeDigits.set(i, getRandom());
         }
-        try {
-            printOut(this.numpad.getCombinations(someHugeDigits));
-        } catch (IllegalNumberException e) {
-            e.printStackTrace();
+        printOut(this.numpad.getCombinations(someHugeDigits));
+    }
+
+    @Test
+    void from0To99() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            numbers.set(i, i);
         }
+        printOut(this.numpad.getCombinations(numbers));
     }
 
     @Test()
     void testIllegalNumber() throws IllegalNumberException {
-        int[] illegalDigits = {13, 14, 15};
-        printOut(this.numpad.getCombinations(illegalDigits));
+        //int[] illegalDigits = {13, 14, 15};
+        //printOut(this.numpad.getCombinations(illegalDigits));
     }
 
     private int getRandom() {
