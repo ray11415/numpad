@@ -46,12 +46,6 @@ class NumpadlettersApplicationTests {
         printOut(this.numpad.getCombinations(numbers));
     }
 
-    @Test()
-    void testIllegalNumber() throws IllegalNumberException {
-        //int[] illegalDigits = {13, 14, 15};
-        //printOut(this.numpad.getCombinations(illegalDigits));
-    }
-
     private int getRandom() {
         Random random = new Random();
         return random.nextInt(9);
